@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IP WHOIS Result</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .result {
+            width: 60%;
+            margin: auto;
+            margin-top: 40px;
+        }
+
+        .result h3 {
+            margin-bottom: 10px;
+        }
+
+        .result p {
+            margin: 5px 0;
+            padding: 10px;
+            background-color: #1e1e1e;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .buttons a, .buttons button {
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: darkgreen;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>IP WHOIS Info for {{ ip }}</h1>
+    <div class="result">
+        {% for key, value in result.items() %}
+            <h3>{{ key }}</h3>
+            <p>{{ value }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="buttons">
+        <a href="{{ url_for('ipwhois.ipwhois_form') }}">Back</a>
+        <button onclick="window.print()">Print</button>
+        <a href="{{ url_for('user.user_home') }}">Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WHOIS Result</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 95%;
+            background-color: #161b22;
+            padding: 40px;
+            margin: 40px 20px;
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.4em;
+            margin-bottom: 40px;
+            color: #58d68d;
+        }
+
+        .info {
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .label {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 6px;
+            color: #f1c40f;
+        }
+
+        p, li {
+            font-size: 1em;
+            margin: 6px 0;
+            color: #c9d1d9;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            list-style-type: disc;
+        }
+
+        .btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .btn, .print-btn {
+            padding: 12px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .print-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .print-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .btn {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .btns {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WHOIS Info: {{ data.domain_name or "Not Available" }}</h1>
+
+        <div class="info"><div class="label">Domain Name:</div><p>{{ data.domain_name or "Not Available" }}</p></div>
+        <div class="info"><div class="label">Registrar:</div><p>{{ data.registrar or "Not Available" }}</p></div>
+        <div class="info"><div class="label">Registrar URL:</div><p>{{ data.registrar_url or "Not Available" }}</p></div>
+        <div class="info"><div class="label">Reseller:</div><p>{{ data.reseller or "Not Available" }}</p></div>
+        <div class="info"><div class="label">WHOIS Server:</div><p>{{ data.whois_server or "Not Available" }}</p></div>
+        <div class="info"><div class="label">Referral URL:</div><p>{{ data.referral_url or data.referer or data.referrer or "Not Available" }}</p></div>
+
+        {% for label, value in {
+            'Updated Date': data.updated_date,
+            'Creation Date': data.creation_date,
+            'Expiration Date': data.expiration_date,
+            'Name Servers': data.name_servers,
+            'Status': data.status,
+            'Emails': data.emails
+        }.items() %}
+        <div class="info">
+            <div class="label">{{ label }}:</div>
+            <p>
+                {% if value %}
+                    {% if value is iterable and value is not string %}
+                        <ul>{% for item in value %}<li>{{ item }}</li>{% endfor %}</ul>
+                    {% else %}
+                        <ul><li>{{ value }}</li></ul>
+                    {% endif %}
+                {% else %}
+                    Not Available
+                {% endif %}
+            </p>
+        </div>
+        {% endfor %}
+
+        <div class="info"><div class="label">DNS Sec:</div><p>{{ data.dnssec or "Not Available" }}</p></div>
+        <div class="info"><div class="label">Name:</div><p>{{ data.name or "Not Available" }}</p></div>
+        <div class="info"><div class="label">Organization:</div><p>{{ data.org or "Not Available" }}</p></div>
+        <div class="info"><div class="label">Address:</div><p>{{ data.address or "Not Available" }}</p></div>
+        <div class="info"><div class="label">City:</div><p>{{ data.city or "Not Available" }}</p></div>
+        <div class="info"><div class="label">State:</div><p>{{ data.state or "Not Available" }}</p></div>
+        <div class="info"><div class="label">Registrant Postal Code:</div><p>{{ data.registrant_postal_code or "Not Available" }}</p></div>
+        <div class="info"><div class="label">Country:</div><p>{{ data.country or "Not Available" }}</p></div>
+    </div>
+
+    <div class="btns">
+        <button class="print-btn" onclick="window.print()">Print</button>
+        <a href="{{ url_for('user.user_home') }}" class="btn">Back</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Lookup Result</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #eee;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #dk {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #1c1c1c;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 255, 100, 0.1);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #2ecc71;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 22px;
+            color:lightgreen;
+            margin: 15px 0 10px;
+        }
+
+        h3 {
+            font-size: 18px;
+            color: #ccc;
+            margin: 8px 0;
+        }
+
+        hr {
+            border: 1px solid #444;
+            margin: 30px 0;
+        }
+
+        a {
+            color: #2ecc71;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+
+
+        .btns {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn, .print-btn {
+            background-color: #2ecc71;
+            color: black;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+
+
+        @media (max-width: 600px) {
+            #dk {
+                width: 95%;
+                padding: 20px;
+            }
+
+            h1, h2, h3 {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="dk">
+        {% if cord_by_city %}
+            <h2>Coordinate for:</h2>
+            <h3>Address: {{ cord_by_city.address }}</h3>
+            <h3>Latitude: {{ cord_by_city.latitude }}</h3>
+            <h3>Longitude: {{ cord_by_city.longitude }}</h3>
+        {% endif %}
+
+        {% if reverse_cord %}
+            <hr>
+            <h2>Reverse Lookup for:</h2>
+            <h3>Input Coordinates: {{ cord1 }}, {{ cord2 }}</h3>
+            <h3>Result: {{ reverse_cord }}</h3>
+        {% endif %}
+
+        {% if dist_cities %}
+            <hr>
+            <h2>Distance Between {{ city1 }} and {{ city2 }}:</h1>
+            <h3>{{ dist_cities }} km</h2>
+        {% endif %}
+
+        {% if cord_to_city %}
+            <hr>
+            <h2>Coordinates Entered:</h2>
+            <h3>{{ cord1 }}, {{ cord2 }}</h3>
+            <h3>City: {{ cord_to_city }}</h3>
+        {% endif %}
+
+        {% if dist_by_cord %}
+            <hr>
+            <h2>Distance Between Coordinates:</h2>
+            <h3>From: {{ cord1 }}, {{ cord2 }}</h3>
+            <h3>To: {{ city2_coord1 }}, {{ city2_coord2 }}</h3>
+            <h2>{{ dist_by_cord }} km</h2>
+        {% endif %}
+
+        <hr>
+    </div>
+
+    <div class="btns">
+        <button class="print-btn" onclick="window.print()">Print</button>
+        <a href="{{ url_for('user.user_home') }}" class="btn"> Back</a>
+    </div>
+</body>
+</html>

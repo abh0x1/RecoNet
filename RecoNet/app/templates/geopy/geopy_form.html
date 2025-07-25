@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinate Form</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        input {
+            padding: 10px;
+            /* margin: 10px 0; */
+            width: 70%;
+            color: white;
+            background-color: black;
+            border: none;
+            border-bottom: 1px solid white;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        #dk {
+            width: 50%;
+            padding: 10px;
+            position: absolute;
+            top: 2%;
+            left: 50%;
+            transform: translate(-50%);
+        }
+
+        button {
+            width: 73%;
+            height: 35px;
+            border: none;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: rgb(26, 172, 23);
+            color: white;
+        }
+
+        button:active {
+            scale: 0.95;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        .notes {
+            margin-top: 40px;
+            border-top: 1px solid white;
+            padding-top: 20px;
+        }
+
+        .notes h2 {
+            font-size: 22px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .notes ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+
+        .notes li {
+            font-size: 17px;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+
+        p,a{
+            text-decoration: none;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="dk">
+        <h1>Enter Coordinates</h1>
+        <form method="post" action="{{url_for('geopy.geopy_lookup')}}">
+
+            <label for="city1">City 1 Name:</label><br>
+            <input type="text" id="city1" name="city1"><br>
+
+            <label for="city2">City 2 Name:</label><br>
+            <input type="text" id="city2" name="city2"><br>
+
+            <label for="coord1">City 1 Latitude:</label><br>
+            <input type="text" id="coord1" name="coord1"><br>
+
+            <label for="coord2">City 1 Longitude:</label><br>
+            <input type="text" id="coord2" name="coord2"><br>
+
+            <label for="city2_coord1">City 2 Latitude:</label><br>
+            <input type="text" id="city2_coord1" name="city2_coord1"><br>
+
+            <label for="city2_coord2">City 2 Longitude:</label><br>
+            <input type="text" id="city2_coord2" name="city2_coord2"><br>
+
+            <button type="submit">Submit</button>
+
+            <p>Back to Home: <a href="{{ url_for('main.welcome') }}" style="color: lightgreen;">Home</a></p>
+        </form>
+
+        <div class="notes">
+            <h2>Key Notes</h2>
+            <ul>
+                <li>Only City 1 Name → Get coordinates and address.</li>
+                <li>City 1 Latitude & Longitude → Get reverse geocoded address.</li>
+                <li>City 1 & City 2 Names → Get distance between cities.</li>
+                <li>Coordinates of both cities → Get distance calculation.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

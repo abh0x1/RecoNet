@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DNS Results</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #333;
+            color: #ddd;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #1a1a1a;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            word-wrap: break-word;
+            border: 1px solid #333;
+        }
+
+        .btns {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .btns a, .btns button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            font-size: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btns a:hover, .btns button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>DNS Records for {{ domain }}</h1>
+
+    {% for record_type, values in records.items() %}
+        <h2>{{ record_type }} Records</h2>
+        <ul>
+            {% for val in values %}
+                <li>{{ val }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+
+    <div class="btns">
+        <a href="{{ url_for('dns.dns_form') }}">Back to Form</a>
+        <a href="{{ url_for('user.user_home') }}">Back</a>
+        <button onclick="window.print()">Print</button>
+    </div>
+</body>
+</html>

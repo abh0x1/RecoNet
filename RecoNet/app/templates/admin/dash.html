@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    header h1 {
+      font-size: 4.5rem;
+      color: crimson;
+      margin-bottom: 10px;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      padding: 40px 60px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 40px 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(220, 20, 60, 0.2);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(220, 20, 60, 0.3);
+    }
+
+    .card a {
+      text-decoration: none;
+      font-size: 1.8rem;
+      color: white;
+      font-weight: bold;
+      display: block;
+      padding: 20px;
+      background-color: crimson;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .card a:hover {
+      background-color: #b30000;
+    }
+
+    .flash-container {
+      text-align: center;
+      font-size: 1.3rem;
+      margin-top: 30px;
+      padding: 10px;
+      background-color: #222;
+      color: lightgreen;
+      border-radius: 10px;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .flash-message {
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 3rem;
+      }
+
+      .dashboard {
+        padding: 20px;
+      }
+
+      .card a {
+        font-size: 1.4rem;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Admin Dashboard</h1>
+  </header>
+
+  <div class="dashboard">
+    <div class="card">
+      <a href="{{ url_for('admin.add_user_form') }}">➕ Add New User</a>
+    </div>
+    <div class="card">
+      <a href="{{ url_for('admin.manage_users') }}">👥 View All Users</a>
+    </div>
+    <div class="card">
+      <a href="{{ url_for('admin.update_user_form') }}">✏️ Update User</a>
+    </div>
+    <div class="card">
+      <a href="{{ url_for('admin.delete_user_form') }}">🗑️ Delete User</a>
+    </div>
+    <div class="card">
+      <a href="{{ url_for('auth.logout') }}">🚪 Logout</a>
+    </div>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="flash-message {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% endwith %}
+
+</body>
+</html>

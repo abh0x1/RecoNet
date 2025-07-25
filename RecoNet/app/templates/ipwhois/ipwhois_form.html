@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IP WHOIS Lookup</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 30px;
+        }
+
+        form {
+            width: 400px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, button {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background-color: darkgreen;
+            color: white;
+            font-weight: bold;
+        }
+
+        p {
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>IP WHOIS Lookup</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <form method="POST" action="{{ url_for('ipwhois.ip_lookup') }}">
+        <input type="text" name="ip" placeholder="Enter IP Address" required>
+        <button type="submit">Lookup</button>
+    </form>
+</body>
+</html>

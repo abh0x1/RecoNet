@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RECON.SENA</title>
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: monospace;
+      opacity: 0.9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin-top: 60px;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 6rem;
+      text-decoration: underline;
+      color: blue;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: green;
+    }
+
+    .login {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 60px 0;
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .login a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      background-color: whitesmoke;
+      border-radius: 8px;
+      width: 160px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      transition: 0.3s ease;
+    }
+
+    .login a:hover {
+      background-color: #444;
+      color: red;
+    }
+
+    .vision-section,
+    .follow-section {
+      padding: 40px 20px;
+      margin: 60px auto;
+      background-color: #1c1c1c;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #444;
+      width: 90%;
+      max-width: 1000px;
+      text-align: center;
+    }
+
+    .vision-section h3,
+    .follow-section h3 {
+      font-size: 2.5rem;
+      color: cyan;
+      margin-bottom: 20px;
+    }
+
+    .vision-section p,
+    .follow-section p {
+      font-size: 1.4rem;
+      line-height: 1.6;
+    }
+
+    .social-text-links {
+      margin-top: 25px;
+      font-size: 1.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-text-links a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border: 1px solid white;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    .social-text-links a:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .footer {
+      color: white;
+      padding: 40px 20px 20px;
+      text-align: center;
+      font-size: 28px;
+      margin-top: 100px;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .footer-content p {
+      margin: 5px 0;
+      line-height: 1.6;
+    }
+
+    .footer strong {
+      color: #fff;
+      font-size: 24px;
+    }
+
+    .copyright {
+      font-size: 22px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 4rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .login a {
+        width: 140px;
+        height: 45px;
+        font-size: 1.3rem;
+      }
+
+      .vision-section h3,
+      .follow-section h3 {
+        font-size: 2rem;
+      }
+
+      .vision-section p,
+      .follow-section p {
+        font-size: 1.2rem;
+      }
+
+      .footer {
+        font-size: 20px;
+      }
+
+      .footer strong {
+        font-size: 20px;
+      }
+
+      .copyright {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Flash messages -->
+  <div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-container">
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- Title & Headline -->
+  <div class="container">
+    <h1>RecoNet</h1>
+    <h2>Unleashing the Power of Open Source Intelligence...</h2>
+  </div>
+
+  <!-- Login & Signup -->
+  <div class="login">
+    <a href="{{url_for('auth.user_login_form')}}">Login</a>
+    <a href="{{url_for('auth.user_signup_form')}}">Sign Up</a>
+    <a href="{{url_for('auth.admin_form')}}">Admin</a>
+  </div>
+
+  <!-- Our Vision Section -->
+  <div class="vision-section">
+    <h3>Our Vision</h3>
+    <p>
+      At RecoNet, our vision is to empower individuals with seamless access to open-source intelligence tools. 
+      We aim to bridge the gap between cybersecurity enthusiasts and real-world reconnaissance using cutting-edge, user-friendly platforms.
+    </p>
+  </div>
+
+  <!-- Follow Us Section -->
+  <div class="follow-section">
+    <h3>Follow Us</h3>
+    <p>Stay connected and get the latest updates:</p>
+    <div class="social-text-links">
+      <a href="https://instagram.com/" target="_blank">Instagram</a>
+      <a href="https://twitter.com/" target="_blank">Twitter</a>
+      <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Developed by <strong><i>Abhishek</i></strong></p>
+      <p class="copyright">&copy; 2025 RECON.SENA All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
